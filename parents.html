@@ -803,19 +803,6 @@
         }
 
         @media (max-width: 768px) {
-            html, body {
-                overflow-x: hidden !important;
-                width: 100%;
-                max-width: 100vw;
-                position: relative;
-            }
-            .site-wrapper {
-                overflow-x: hidden;
-                width: 100%;
-                max-width: 100vw;
-                position: relative;
-            }
-
             .hero h1 { font-size: 2.5rem; }
             section { padding: var(--md-spacing-2xl) var(--md-spacing-lg); }
             .grid { grid-template-columns: 1fr; }
@@ -829,8 +816,7 @@
             .nav-links {
                 position: fixed;
                 top: 0;
-                right: 0;
-                transform: translateX(100%);
+                right: -100%;
                 width: 280px;
                 height: 100vh;
                 height: 100dvh;
@@ -839,14 +825,15 @@
                 border-left: 1px solid var(--md-sys-color-outline);
                 padding: 5rem 2rem 2rem;
                 gap: 1.5rem;
-                transition: transform var(--md-motion-duration-default) var(--md-motion-expressive-default-spatial);
+                transition: right var(--md-motion-duration-default) var(--md-motion-expressive-default-spatial);
                 z-index: 999;
                 box-shadow: -10px 0 40px rgba(0,0,0,0.1);
                 align-items: flex-start;
-                will-change: transform;
+                transform: translateZ(0); /* Hardware acceleration to prevent flicker */
+                will-change: transform, right;
             }
             .nav-links.open {
-                transform: translateX(0);
+                right: 0;
             }
             .nav-links a.nav-item {
                 font-size: 1.1rem;
@@ -931,7 +918,6 @@
     </style>
 </head>
 <body data-theme="dark">
-    <div class="site-wrapper">
 
     <!-- Splash Screen -->
     <div id="pwa-splash">
@@ -955,13 +941,13 @@
                 Chinmay Dhok
             </a>
             <div class="nav-links" id="nav-links">
-                <a href="#about" class="nav-item">About</a>
-                <a href="#projects" class="nav-item">Projects</a>
-                <a href="#career-docs" class="nav-item">Documents</a>
+                <a href="#about" class="nav-item">माझ्याबद्दल (About)</a>
+                <a href="#projects" class="nav-item">माझे काम (Projects)</a>
+                <a href="#career-docs" class="nav-item">कागदपत्रे (Documents)</a>
                 <a href="./strategic-playbook.html" class="nav-btn">Strategic Playbook</a>
                 <button id="install-btn" class="nav-btn install-btn" aria-label="Install App">
                     <span class="material-symbols-rounded" style="font-size: 18px;">install_mobile</span>
-                    Install App
+                    App इन्स्टॉल करा
                 </button>
             </div>
             <div style="display: flex; align-items: center; gap: 0.5rem;">
@@ -969,7 +955,7 @@
                     <svg id="sun-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                     <svg id="moon-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 </button>
-                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open navigation menu" aria-controls="nav-links" aria-expanded="false">
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open navigation menu">
                     <span class="material-symbols-rounded">menu</span>
                 </button>
             </div>
@@ -977,9 +963,9 @@
     </nav>
 
     <section id="hero" class="hero">
-        <h1 class="reveal hero-stagger-1">Chinmay Dhok</h1>
-        <h2 class="reveal hero-stagger-2">Senior Information Security Analyst | Cloud Architect</h2>
-        <p class="hero-tagline reveal hero-stagger-3">"Bridging the gap between high-velocity engineering and rigorous enterprise compliance."</p>
+        <h1 class="reveal hero-stagger-1">चिन्मय ढोक (Chinmay Dhok)</h1>
+        <h2 class="reveal hero-stagger-2">Information Security Engineer | Cloud Architect</h2>
+        <p class="hero-tagline reveal hero-stagger-3">"High-velocity engineering आणि कठोर Enterprise Compliance यामधील दुवा."</p>
         
         <div class="contact-links reveal hero-stagger-4">
             <a href="mailto:chinmaydhok2013@gmail.com">
@@ -1000,11 +986,11 @@
     <section id="about">
         <div class="about-layout">
             <div class="about-left reveal">
-                <h2 class="section-title" style="margin-bottom: 1.5rem;">About Me</h2>
+                <h2 class="section-title" style="margin-bottom: 1.5rem;">माझ्याबद्दल (About Me)</h2>
                 <p class="about-text">
-                    I am a security-focused engineering leader with <strong>6+ years of progressive experience</strong> scaling enterprise cloud environments. My career is defined by a successful evolution from deep systems engineering (architecting networks for 1500+ users across Azure/AWS) to my current focus: <strong>Enterprise Information Security, Zero-Trust Architecture, and AI-Assisted DevSecOps</strong>.
+                    मी एक security-focused engineering leader आहे, ज्याला enterprise cloud environments चा विस्तार करण्याचा <strong>६+ वर्षांचा अनुभव</strong> आहे. माझी कारकीर्द deep systems engineering मधून (Azure/AWS वर १५००+ वापरकर्त्यांसाठी नेटवर्क तयार करणे) आता <strong>Enterprise Information Security, Zero-Trust Architecture, आणि AI-Assisted DevSecOps</strong> यावर केंद्रित झाली आहे.
                     <br><br>
-                    <strong>Core Value Proposition:</strong> I possess the operational depth to build and migrate massive cloud infrastructures, combined with the strategic oversight required to secure them against modern threats, integrate AI-driven workflows, and guarantee stringent enterprise compliance (SOC 2, ISO 27001, GDPR).
+                    <strong>Core Value Proposition:</strong> आधुनिक धोक्यांपासून सुरक्षित ठेवण्यासाठी, AI-आधारित workflows एकत्रित करण्यासाठी आणि कठोर enterprise compliance (SOC 2, ISO 27001, GDPR) ची हमी देण्यासाठी लागणाऱ्या धोरणात्मक दृष्टीसोबतच मोठ्या प्रमाणातील cloud infrastructures तयार करण्याची आणि migrate करण्याची माझ्याकडे सखोल क्षमता आहे.
                 </p>
             </div>
 
@@ -1046,7 +1032,7 @@
     </section>
 
     <section id="projects">
-        <h2 class="section-title reveal">Featured Projects</h2>
+        <h2 class="section-title reveal">माझे काम (Featured Projects)</h2>
         <div class="grid reveal-stagger">
             
             <a href="gemini-spark.html" class="card spark-card reveal">
@@ -1054,8 +1040,8 @@
                     <div class="card-icon"><span class="material-symbols-rounded">auto_awesome</span></div>
                     <h2>Gemini Spark</h2>
                 </div>
-                <p>Master everyday life with AI. My autonomous personal operating system orchestrating routine logistics and administrative workflows.</p>
-                <div class="btn-text">View Spark Library <span class="material-symbols-rounded">arrow_forward</span></div>
+                <p>AI च्या मदतीने दैनंदिन जीवनातील कामे सोपी करा. माझी autonomous personal operating system जी रोजची आणि प्रशासकीय कामे हाताळते.</p>
+                <div class="btn-text">Spark Library पहा <span class="material-symbols-rounded">arrow_forward</span></div>
             </a>
 
             <a href="https://github.com/chinmay-dhok/GCP-Zero-Trust-Architecture" target="_blank" class="card reveal">
@@ -1063,8 +1049,8 @@
                     <div class="card-icon"><span class="material-symbols-rounded">shield</span></div>
                     <h2>GCP Zero-Trust Architecture</h2>
                 </div>
-                <p>Production-grade PAM framework and VPN-to-Tailscale migration defined as IaC.</p>
-                <div class="btn-text">View on GitHub <span class="material-symbols-rounded">arrow_forward</span></div>
+                <p>Production-grade PAM framework आणि IaC म्हणून परिभाषित केलेले VPN-to-Tailscale migration.</p>
+                <div class="btn-text">GitHub वर पहा <span class="material-symbols-rounded">arrow_forward</span></div>
             </a>
 
             <a href="https://github.com/chinmay-dhok/vapt-ai-workflow" target="_blank" class="card reveal">
@@ -1072,8 +1058,8 @@
                     <div class="card-icon"><span class="material-symbols-rounded">bug_report</span></div>
                     <h2>Internal VAPT AI Workflow</h2>
                 </div>
-                <p>AI-assisted methodology for replicating vulnerabilities, re-rating CVSS, and producing reports.</p>
-                <div class="btn-text">View on GitHub <span class="material-symbols-rounded">arrow_forward</span></div>
+                <p>Vulnerabilities शोधणे, CVSS चे पुनर्मूल्यांकन करणे आणि अहवाल तयार करण्यासाठी AI-आधारित पद्धत.</p>
+                <div class="btn-text">GitHub वर पहा <span class="material-symbols-rounded">arrow_forward</span></div>
             </a>
 
             <a href="https://github.com/chinmay-dhok/Automated-Compliance-Auditor" target="_blank" class="card reveal">
@@ -1081,8 +1067,8 @@
                     <div class="card-icon"><span class="material-symbols-rounded">fact_check</span></div>
                     <h2>Automated Compliance Auditor</h2>
                 </div>
-                <p>LLM-powered platform to monitor ISO 27001/SOC 2 and auto-answer vendor questionnaires.</p>
-                <div class="btn-text">View on GitHub <span class="material-symbols-rounded">arrow_forward</span></div>
+                <p>ISO 27001/SOC 2 वर लक्ष ठेवण्यासाठी आणि vendors च्या प्रश्नांची आपोआप उत्तरे देण्यासाठी LLM-powered प्लॅटफॉर्म.</p>
+                <div class="btn-text">GitHub वर पहा <span class="material-symbols-rounded">arrow_forward</span></div>
             </a>
 
             <a href="https://github.com/chinmay-dhok/Supply-Chain-Security-Hardening" target="_blank" class="card reveal">
@@ -1090,8 +1076,8 @@
                     <div class="card-icon"><span class="material-symbols-rounded">link</span></div>
                     <h2>Supply Chain Security Hardening</h2>
                 </div>
-                <p>Org-wide dependency auditing, CVE remediation, and CI/CD security pipelines.</p>
-                <div class="btn-text">View on GitHub <span class="material-symbols-rounded">arrow_forward</span></div>
+                <p>संस्था-व्यापी dependency auditing, CVE remediation, आणि CI/CD security pipelines.</p>
+                <div class="btn-text">GitHub वर पहा <span class="material-symbols-rounded">arrow_forward</span></div>
             </a>
 
             <a href="https://github.com/chinmay-dhok/DevFlowBot-Gemini-3-Pro-GitHubPR" target="_blank" class="card reveal">
@@ -1099,47 +1085,55 @@
                     <div class="card-icon"><span class="material-symbols-rounded">smart_toy</span></div>
                     <h2>DevFlowBot (AI PR Agent)</h2>
                 </div>
-                <p>Autonomous agent for automating frontend workflows with human-in-the-loop QA gates.</p>
-                <div class="btn-text">View on GitHub <span class="material-symbols-rounded">arrow_forward</span></div>
+                <p>Human-in-the-loop QA gates सह frontend workflows स्वयंचलित करण्यासाठी autonomous agent.</p>
+                <div class="btn-text">GitHub वर पहा <span class="material-symbols-rounded">arrow_forward</span></div>
             </a>
 
         </div>
     </section>
 
     <section id="career-docs">
-        <h2 class="section-title reveal">Documents</h2>
+        <h2 class="section-title reveal">कागदपत्रे (Documents)</h2>
         <div class="grid reveal-stagger">
             <a href="Chinmay_Dhok_Resume_2026.pdf" target="_blank" class="card reveal">
                 <div class="card-header">
                     <div class="card-icon"><span class="material-symbols-rounded">article</span></div>
                     <h2>Modern Resume (2026)</h2>
                 </div>
-                <p>ATS-optimized, punchy bullet points with high visual impact. Ideal for tech-forward roles.</p>
-                <div class="btn-text">View Document <span class="material-symbols-rounded">arrow_forward</span></div>
+                <p>ATS-optimized, उच्च दृश्य प्रभावासह मुद्देसूद माहिती. Tech-forward भूमिकांसाठी आदर्श.</p>
+                <div class="btn-text">Document पहा <span class="material-symbols-rounded">arrow_forward</span></div>
             </a>
             <a href="archived/Chinmay_Dhok_Resume_Classic.pdf" target="_blank" class="card reveal">
                 <div class="card-header">
                     <div class="card-icon"><span class="material-symbols-rounded">account_balance</span></div>
                     <h2>Classic Resume (Full)</h2>
                 </div>
-                <p>Traditional styling with detailed, cleanly summarized paragraph experiences.</p>
-                <div class="btn-text">View Document <span class="material-symbols-rounded">arrow_forward</span></div>
+                <p>पारंपारिक शैलीमध्ये सविस्तर, स्पष्टपणे सारांशित केलेले परिच्छेद.</p>
+                <div class="btn-text">Document पहा <span class="material-symbols-rounded">arrow_forward</span></div>
             </a>
             <a href="archived/Chinmay_Dhok_Resume_Classic_Summary.pdf" target="_blank" class="card reveal">
                 <div class="card-header">
                     <div class="card-icon"><span class="material-symbols-rounded">bolt</span></div>
                     <h2>Classic Resume (Summary)</h2>
                 </div>
-                <p>Concise two-page traditional summary highlighting core architecture and compliance leadership.</p>
-                <div class="btn-text">View Document <span class="material-symbols-rounded">arrow_forward</span></div>
+                <p>Core architecture आणि compliance नेतृत्वावर प्रकाश टाकणारा संक्षिप्त दोन पानांचा पारंपारिक सारांश.</p>
+                <div class="btn-text">Document पहा <span class="material-symbols-rounded">arrow_forward</span></div>
             </a>
             <a href="cover-letter.html" class="card reveal">
                 <div class="card-header">
                     <div class="card-icon"><span class="material-symbols-rounded">edit_document</span></div>
                     <h2>Cover Letter</h2>
                 </div>
-                <p>A structured, persuasive overview highlighting my Zero-Trust & DevSecOps achievements.</p>
-                <div class="btn-text">View Document <span class="material-symbols-rounded">arrow_forward</span></div>
+                <p>माझ्या Zero-Trust आणि DevSecOps मधील यशावर प्रकाश टाकणारा एक संरचित, प्रभावी आढावा.</p>
+                <div class="btn-text">Document पहा <span class="material-symbols-rounded">arrow_forward</span></div>
+            </a>
+            <a href="Chinmay_Dhok_Master_Accomplishments_Public.pdf" target="_blank" class="card reveal">
+                <div class="card-header">
+                    <div class="card-icon"><span class="material-symbols-rounded">workspace_premium</span></div>
+                    <h2>Master Accomplishments</h2>
+                </div>
+                <p>२०२६ मधील security initiatives, TPRM मंजुरी आणि infrastructure scaling यांचा सर्वसमावेशक सार्वजनिक रेकॉर्ड.</p>
+                <div class="btn-text">Document पहा <span class="material-symbols-rounded">arrow_forward</span></div>
             </a>
         </div>
     </section>
@@ -1148,18 +1142,18 @@
         <div class="footer-content reveal">
             <div class="footer-brand">
                 <h3>Chinmay Dhok</h3>
-                <p>Bridging the gap between high-velocity engineering and rigorous enterprise compliance. Security architect, cloud engineer, and AI workflow builder.</p>
+                <p>High-velocity engineering आणि कठोर enterprise compliance यामधील दुवा. Security Architect, Cloud Engineer, आणि AI Workflow Builder.</p>
             </div>
             <div class="footer-links">
                 <h4>Quick Links</h4>
-                <a href="#about">About</a>
-                <a href="#projects">Projects</a>
+                <a href="#about">माझ्याबद्दल (About)</a>
+                <a href="#projects">माझे काम (Projects)</a>
                 <a href="#career-docs">Documents</a>
                 <a href="./strategic-playbook.html">Strategic Playbook</a>
                 <a href="gemini-spark.html">Gemini Spark</a>
             </div>
             <div class="footer-social">
-                <h4>Connect</h4>
+                <h4>संपर्क साधा (Connect)</h4>
                 <div class="footer-social-links">
                     <a href="mailto:chinmaydhok2013@gmail.com">
                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><path d="M22 6l-10 7L2 6"></path></svg>
@@ -1177,7 +1171,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p class="copyright">&copy; 2026 Chinmay Dhok. Built with ❤️ and secured by Cloudflare.</p>
+            <p class="copyright">&copy; 2026 चिन्मय ढोक. ❤️ ने बनवलेले आणि Cloudflare द्वारे सुरक्षित.</p>
             <div class="footer-qr" title="Scan to share this portfolio">
                 <span>Share</span>
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://chinmaydhok.pages.dev/" alt="Portfolio QR Code">
@@ -1246,21 +1240,13 @@
 
         // === Navbar Scroll Effect ===
         const navbar = document.querySelector('.navbar');
-        let isScrolling = false;
-
         window.addEventListener('scroll', () => {
-            if (!isScrolling) {
-                window.requestAnimationFrame(() => {
-                    if (window.scrollY > 20) {
-                        navbar.classList.add('scrolled');
-                    } else {
-                        navbar.classList.remove('scrolled');
-                    }
-                    isScrolling = false;
-                });
-                isScrolling = true;
+            if (window.scrollY > 20) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
             }
-        }, { passive: true });
+        });
 
         // === Active Nav Indicator (Intersection Observer) ===
         const sections = document.querySelectorAll('section[id]');
@@ -1292,19 +1278,12 @@
 
         // === Ripple Effect (track mouse position) ===
         document.querySelectorAll('.card').forEach(card => {
-            let rafId = null;
             card.addEventListener('mousemove', (e) => {
-                if (rafId) {
-                    cancelAnimationFrame(rafId);
-                }
-                rafId = requestAnimationFrame(() => {
-                    const rect = card.getBoundingClientRect();
-                    const x = ((e.clientX - rect.left) / rect.width) * 100;
-                    const y = ((e.clientY - rect.top) / rect.height) * 100;
-                    card.style.setProperty('--ripple-x', x + '%');
-                    card.style.setProperty('--ripple-y', y + '%');
-                    rafId = null;
-                });
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--ripple-x', x + '%');
+                card.style.setProperty('--ripple-y', y + '%');
             });
         });
 
@@ -1317,16 +1296,12 @@
             navLinksEl.classList.add('open');
             navOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
-            mobileMenuBtn.setAttribute('aria-expanded', 'true');
-            mobileMenuBtn.setAttribute('aria-label', 'Close navigation menu');
         }
 
         function closeMobileNav() {
             navLinksEl.classList.remove('open');
             navOverlay.classList.remove('active');
             document.body.style.overflow = '';
-            mobileMenuBtn.setAttribute('aria-expanded', 'false');
-            mobileMenuBtn.setAttribute('aria-label', 'Open navigation menu');
         }
 
         mobileMenuBtn.addEventListener('click', () => {
@@ -1357,7 +1332,8 @@
         installBtn.addEventListener('click', async () => {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
-                await deferredPrompt.userChoice;
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`Install outcome: ${outcome}`);
                 deferredPrompt = null;
                 installBtn.classList.remove('show');
             }
@@ -1371,9 +1347,9 @@
         // === Service Worker Registration ===
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service-worker.js')
+                .then(reg => console.log('SW registered:', reg.scope))
                 .catch(err => console.error('SW registration failed:', err));
         }
     </script>
-    </div>
 </body>
 </html>
